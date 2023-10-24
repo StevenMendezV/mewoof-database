@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3307
--- Tiempo de generación: 24-10-2023 a las 04:28:57
+-- Tiempo de generación: 24-10-2023 a las 05:10:44
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -140,6 +140,33 @@ INSERT INTO `estados_solicitudes` (`ID_EstadoSolicitud`, `Estado`) VALUES
 (3, 'Rechazada'),
 (4, 'Finalizada'),
 (5, 'Exitosa');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mascotas`
+--
+
+CREATE TABLE `mascotas` (
+  `ID_Mascota` int(11) NOT NULL,
+  `Nombre` varchar(50) DEFAULT NULL,
+  `Edad` int(11) DEFAULT NULL,
+  `ID_Especie` int(11) DEFAULT NULL,
+  `ID_Raza` int(11) DEFAULT NULL,
+  `ID_Size` int(11) DEFAULT NULL,
+  `ID_Usuario` int(11) DEFAULT NULL,
+  `ID_Estado_Salud` int(11) DEFAULT NULL,
+  `ID_Estado_Adopcion` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mascotas`
+--
+
+INSERT INTO `mascotas` (`ID_Mascota`, `Nombre`, `Edad`, `ID_Especie`, `ID_Raza`, `ID_Size`, `ID_Usuario`, `ID_Estado_Salud`, `ID_Estado_Adopcion`) VALUES
+(7, 'Fifi', 3, 1, 5, 1, 1, 1, 1),
+(8, 'Lulu', 3, 1, 5, 1, 1, 1, 1),
+(9, 'Luna', 3, 1, 5, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -329,6 +356,18 @@ ALTER TABLE `estados_solicitudes`
   ADD PRIMARY KEY (`ID_EstadoSolicitud`);
 
 --
+-- Indices de la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  ADD PRIMARY KEY (`ID_Mascota`),
+  ADD KEY `ID_Especie` (`ID_Especie`),
+  ADD KEY `ID_Size` (`ID_Size`),
+  ADD KEY `ID_Raza` (`ID_Raza`),
+  ADD KEY `ID_Usuario` (`ID_Usuario`),
+  ADD KEY `ID_Estado_Salud` (`ID_Estado_Salud`),
+  ADD KEY `ID_Estado_Adopcion` (`ID_Estado_Adopcion`);
+
+--
 -- Indices de la tabla `paises`
 --
 ALTER TABLE `paises`
@@ -346,7 +385,8 @@ ALTER TABLE `publicaciones`
 -- Indices de la tabla `razas`
 --
 ALTER TABLE `razas`
-  ADD PRIMARY KEY (`ID_Raza`);
+  ADD PRIMARY KEY (`ID_Raza`),
+  ADD KEY `ID_Especie` (`ID_Especie`);
 
 --
 -- Indices de la tabla `sizes`
@@ -398,6 +438,12 @@ ALTER TABLE `estados_solicitudes`
   MODIFY `ID_EstadoSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  MODIFY `ID_Mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT de la tabla `publicaciones`
 --
 ALTER TABLE `publicaciones`
@@ -426,11 +472,28 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Filtros para la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`ID_Especie`) REFERENCES `especies` (`ID_Especie`),
+  ADD CONSTRAINT `mascotas_ibfk_2` FOREIGN KEY (`ID_Size`) REFERENCES `sizes` (`ID_Size`),
+  ADD CONSTRAINT `mascotas_ibfk_3` FOREIGN KEY (`ID_Raza`) REFERENCES `razas` (`ID_Raza`),
+  ADD CONSTRAINT `mascotas_ibfk_4` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`ID_Usuario`),
+  ADD CONSTRAINT `mascotas_ibfk_5` FOREIGN KEY (`ID_Estado_Salud`) REFERENCES `estados_salud` (`ID_Estado_Salud`),
+  ADD CONSTRAINT `mascotas_ibfk_6` FOREIGN KEY (`ID_Estado_Adopcion`) REFERENCES `estados_adopcion` (`ID_Estado_Adopcion`);
+
+--
 -- Filtros para la tabla `publicaciones`
 --
 ALTER TABLE `publicaciones`
   ADD CONSTRAINT `estadoss_publicaciones` FOREIGN KEY (`ID_EstadoPublicacion`) REFERENCES `estados_publicaciones` (`ID_EstadoPublicacion`),
   ADD CONSTRAINT `publicaciones_ibfk_1` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`ID_Usuario`);
+
+--
+-- Filtros para la tabla `razas`
+--
+ALTER TABLE `razas`
+  ADD CONSTRAINT `razas_ibfk_1` FOREIGN KEY (`ID_Especie`) REFERENCES `especies` (`ID_Especie`);
 
 --
 -- Filtros para la tabla `usuarios`
