@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3307
--- Tiempo de generación: 24-10-2023 a las 05:10:44
+-- Tiempo de generación: 03-11-2023 a las 18:19:32
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `ciudades` (
   `ID_Ciudad` varchar(5) NOT NULL,
-  `Nombre` varchar(50) DEFAULT NULL
+  `Nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,7 +49,7 @@ INSERT INTO `ciudades` (`ID_Ciudad`, `Nombre`) VALUES
 
 CREATE TABLE `especies` (
   `ID_Especie` int(11) NOT NULL,
-  `Especie` varchar(20) DEFAULT NULL
+  `Especie` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -68,7 +68,7 @@ INSERT INTO `especies` (`ID_Especie`, `Especie`) VALUES
 
 CREATE TABLE `estados_adopcion` (
   `ID_Estado_Adopcion` int(11) NOT NULL,
-  `Estado` varchar(15) DEFAULT NULL
+  `Estado` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -87,7 +87,7 @@ INSERT INTO `estados_adopcion` (`ID_Estado_Adopcion`, `Estado`) VALUES
 
 CREATE TABLE `estados_publicaciones` (
   `ID_EstadoPublicacion` int(11) NOT NULL,
-  `Estado` varchar(15) DEFAULT NULL
+  `Estado` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -106,7 +106,7 @@ INSERT INTO `estados_publicaciones` (`ID_EstadoPublicacion`, `Estado`) VALUES
 
 CREATE TABLE `estados_salud` (
   `ID_Estado_Salud` int(11) NOT NULL,
-  `Estado` varchar(30) DEFAULT NULL
+  `Estado` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -127,7 +127,7 @@ INSERT INTO `estados_salud` (`ID_Estado_Salud`, `Estado`) VALUES
 
 CREATE TABLE `estados_solicitudes` (
   `ID_EstadoSolicitud` int(11) NOT NULL,
-  `Estado` varchar(15) DEFAULT NULL
+  `Estado` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -149,14 +149,14 @@ INSERT INTO `estados_solicitudes` (`ID_EstadoSolicitud`, `Estado`) VALUES
 
 CREATE TABLE `mascotas` (
   `ID_Mascota` int(11) NOT NULL,
-  `Nombre` varchar(50) DEFAULT NULL,
-  `Edad` int(11) DEFAULT NULL,
-  `ID_Especie` int(11) DEFAULT NULL,
-  `ID_Raza` int(11) DEFAULT NULL,
-  `ID_Size` int(11) DEFAULT NULL,
-  `ID_Usuario` int(11) DEFAULT NULL,
-  `ID_Estado_Salud` int(11) DEFAULT NULL,
-  `ID_Estado_Adopcion` int(11) DEFAULT NULL
+  `Nombre` varchar(50) NOT NULL,
+  `Edad` int(11) NOT NULL,
+  `ID_Especie` int(11) NOT NULL,
+  `ID_Raza` int(11) NOT NULL,
+  `ID_Size` int(11) NOT NULL,
+  `ID_Usuario` int(11) NOT NULL,
+  `ID_Estado_Salud` int(11) NOT NULL,
+  `ID_Estado_Adopcion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -176,7 +176,7 @@ INSERT INTO `mascotas` (`ID_Mascota`, `Nombre`, `Edad`, `ID_Especie`, `ID_Raza`,
 
 CREATE TABLE `paises` (
   `ID_Pais` varchar(5) NOT NULL,
-  `Nombre` varchar(50) DEFAULT NULL
+  `Nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -194,11 +194,11 @@ INSERT INTO `paises` (`ID_Pais`, `Nombre`) VALUES
 
 CREATE TABLE `publicaciones` (
   `ID_Publicacion` int(11) NOT NULL,
-  `ID_Usuario` int(11) DEFAULT NULL,
-  `Fecha` datetime DEFAULT NULL,
-  `ID_EstadoPublicacion` int(11) DEFAULT NULL,
-  `Nombre_Mascota` varchar(20) DEFAULT NULL,
-  `Descripcion` text DEFAULT NULL
+  `ID_Usuario` int(11) NOT NULL,
+  `Fecha` datetime NOT NULL,
+  `ID_EstadoPublicacion` int(11) NOT NULL,
+  `Nombre_Mascota` varchar(20) NOT NULL,
+  `Descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -210,7 +210,7 @@ CREATE TABLE `publicaciones` (
 CREATE TABLE `razas` (
   `ID_Raza` int(11) NOT NULL,
   `ID_Especie` int(11) NOT NULL,
-  `Raza` varchar(20) DEFAULT NULL
+  `Raza` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -252,7 +252,7 @@ INSERT INTO `razas` (`ID_Raza`, `ID_Especie`, `Raza`) VALUES
 CREATE TABLE `sizes` (
   `ID_Size` int(11) NOT NULL,
   `Nombre` varchar(10) NOT NULL,
-  `Dimension_Maxima_CM` int(11) DEFAULT NULL
+  `Dimension_Maxima_CM` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -268,12 +268,26 @@ INSERT INTO `sizes` (`ID_Size`, `Nombre`, `Dimension_Maxima_CM`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `solicitudes`
+--
+
+CREATE TABLE `solicitudes` (
+  `ID_Solicitud` int(11) NOT NULL,
+  `ID_Mascota` int(11) NOT NULL,
+  `ID_Usuario` int(11) NOT NULL,
+  `ID_EstadoSolicitud` int(11) NOT NULL,
+  `Fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tipos`
 --
 
 CREATE TABLE `tipos` (
   `ID_Tipo` varchar(5) NOT NULL,
-  `Nombre` varchar(20) DEFAULT NULL
+  `Nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -292,15 +306,15 @@ INSERT INTO `tipos` (`ID_Tipo`, `Nombre`) VALUES
 
 CREATE TABLE `usuarios` (
   `ID_Usuario` int(11) NOT NULL,
-  `Nombre` varchar(125) DEFAULT NULL,
-  `Apellido` varchar(125) DEFAULT NULL,
-  `ID_Pais` varchar(3) DEFAULT NULL,
-  `ID_Ciudad` varchar(3) DEFAULT NULL,
-  `Telefono` varchar(20) DEFAULT NULL,
-  `Email` varchar(40) DEFAULT NULL,
-  `PASSWORD` varchar(15) DEFAULT NULL,
-  `ID_Tipo` varchar(3) DEFAULT NULL,
-  `About` text DEFAULT NULL
+  `Nombre` varchar(125) NOT NULL,
+  `Apellido` varchar(125) NOT NULL,
+  `ID_Pais` varchar(3) NOT NULL,
+  `ID_Ciudad` varchar(3) NOT NULL,
+  `Telefono` varchar(20) NOT NULL,
+  `Email` varchar(40) NOT NULL,
+  `PASSWORD` varchar(15) NOT NULL,
+  `ID_Tipo` varchar(3) NOT NULL,
+  `About` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -395,6 +409,15 @@ ALTER TABLE `sizes`
   ADD PRIMARY KEY (`ID_Size`);
 
 --
+-- Indices de la tabla `solicitudes`
+--
+ALTER TABLE `solicitudes`
+  ADD PRIMARY KEY (`ID_Solicitud`),
+  ADD KEY `ID_Mascota` (`ID_Mascota`),
+  ADD KEY `ID_Usuario` (`ID_Usuario`),
+  ADD KEY `ID_EstadoSolicitud` (`ID_EstadoSolicitud`);
+
+--
 -- Indices de la tabla `tipos`
 --
 ALTER TABLE `tipos`
@@ -462,6 +485,12 @@ ALTER TABLE `sizes`
   MODIFY `ID_Size` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `solicitudes`
+--
+ALTER TABLE `solicitudes`
+  MODIFY `ID_Solicitud` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -494,6 +523,14 @@ ALTER TABLE `publicaciones`
 --
 ALTER TABLE `razas`
   ADD CONSTRAINT `razas_ibfk_1` FOREIGN KEY (`ID_Especie`) REFERENCES `especies` (`ID_Especie`);
+
+--
+-- Filtros para la tabla `solicitudes`
+--
+ALTER TABLE `solicitudes`
+  ADD CONSTRAINT `solicitudes_ibfk_1` FOREIGN KEY (`ID_Mascota`) REFERENCES `mascotas` (`ID_Mascota`),
+  ADD CONSTRAINT `solicitudes_ibfk_2` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuarios` (`ID_Usuario`),
+  ADD CONSTRAINT `solicitudes_ibfk_3` FOREIGN KEY (`ID_EstadoSolicitud`) REFERENCES `estados_solicitudes` (`ID_EstadoSolicitud`);
 
 --
 -- Filtros para la tabla `usuarios`
