@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3307
--- Tiempo de generación: 03-11-2023 a las 18:19:32
+-- Tiempo de generación: 05-11-2023 a las 23:01:00
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -327,7 +327,11 @@ INSERT INTO `usuarios` (`ID_Usuario`, `Nombre`, `Apellido`, `ID_Pais`, `ID_Ciuda
 (3, 'Natalia', 'Parra', 'COL', 'BGT', '655758', 'email3@proof.com', '123456789', 'UE', 'AboutMe'),
 (4, 'Jazmin', 'Illera', 'COL', 'BGT', '575757', 'email4@proof.com', '987654321', 'UA', 'AboutMe'),
 (5, 'Steven', 'Mendez', 'COL', 'BGT', '655758', 'email5@proof.com', '123456789', 'UE', 'AboutMe'),
-(6, 'Santiago', 'Zuluaga', 'COL', 'MDE', '575757', 'email6@proof.com', '987654321', 'UA', 'AboutMe');
+(6, 'Andres', 'Arteaga', 'COL', 'MDE', '658955', 'email6@proof.com', '987654321', 'UA', 'AboutMe'),
+(7, 'Angela', 'Diosa', 'COL', 'MDE', '658955', 'email7@proof.com', '123456789', 'UA', 'AboutMe'),
+(9, 'Adriana', 'Arteaga', 'COL', 'MDE', '658955', 'email8@proof.com', '123456789', 'UE', 'AboutMe'),
+(11, 'Camilo', 'Forero', 'COL', 'BGT', '77777777', 'email9@proof.com', '123456789', 'UE', 'AboutMe'),
+(12, 'Rafael', 'Mendez', 'COL', 'BGT', '77777777', 'rafa@proof.com', '123456789', 'UE', 'Amo los perros');
 
 --
 -- Índices para tablas volcadas
@@ -428,6 +432,7 @@ ALTER TABLE `tipos`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`ID_Usuario`),
+  ADD UNIQUE KEY `email_unico` (`Email`),
   ADD KEY `ID_Ciudad` (`ID_Ciudad`),
   ADD KEY `ID_Pais` (`ID_Pais`),
   ADD KEY `ID_Tipo` (`ID_Tipo`);
@@ -494,7 +499,7 @@ ALTER TABLE `solicitudes`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
