@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3307
--- Tiempo de generación: 05-11-2023 a las 23:01:00
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 06-11-2023 a las 03:11:52
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `mewoofdb`
+-- Base de datos: `mewoofdb2`
 --
 
 -- --------------------------------------------------------
@@ -156,17 +156,83 @@ CREATE TABLE `mascotas` (
   `ID_Size` int(11) NOT NULL,
   `ID_Usuario` int(11) NOT NULL,
   `ID_Estado_Salud` int(11) NOT NULL,
-  `ID_Estado_Adopcion` int(11) NOT NULL
+  `ID_Estado_Adopcion` int(11) NOT NULL,
+  `ID_NecesidadDinero` int(11) DEFAULT NULL,
+  `ID_NecesidadTiempo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`ID_Mascota`, `Nombre`, `Edad`, `ID_Especie`, `ID_Raza`, `ID_Size`, `ID_Usuario`, `ID_Estado_Salud`, `ID_Estado_Adopcion`) VALUES
-(7, 'Fifi', 3, 1, 5, 1, 1, 1, 1),
-(8, 'Lulu', 3, 1, 5, 1, 1, 1, 1),
-(9, 'Luna', 3, 1, 5, 1, 1, 1, 1);
+INSERT INTO `mascotas` (`ID_Mascota`, `Nombre`, `Edad`, `ID_Especie`, `ID_Raza`, `ID_Size`, `ID_Usuario`, `ID_Estado_Salud`, `ID_Estado_Adopcion`, `ID_NecesidadDinero`, `ID_NecesidadTiempo`) VALUES
+(7, 'Fifi', 3, 1, 5, 1, 1, 1, 1, 1, 2),
+(8, 'Lulu', 3, 1, 5, 1, 1, 1, 1, 1, 2),
+(9, 'Luna', 3, 1, 5, 1, 1, 1, 1, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `necesidades_dinero`
+--
+
+CREATE TABLE `necesidades_dinero` (
+  `ID_NecesidadDinero` int(11) NOT NULL,
+  `Descripcion` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `necesidades_dinero`
+--
+
+INSERT INTO `necesidades_dinero` (`ID_NecesidadDinero`, `Descripcion`) VALUES
+(1, '$100.000 - $399.000'),
+(2, '$400.000 - $699.000'),
+(3, '$700.000 - $999.000'),
+(4, '$1.000.000 o +');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `necesidades_espacio`
+--
+
+CREATE TABLE `necesidades_espacio` (
+  `ID_NecesidadEspacio` int(11) NOT NULL,
+  `Descripcion` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `necesidades_espacio`
+--
+
+INSERT INTO `necesidades_espacio` (`ID_NecesidadEspacio`, `Descripcion`) VALUES
+(1, '10m² - 20m²'),
+(2, '30m² - 50m²'),
+(3, '60m² - 70m²'),
+(4, '80m² - 90m²'),
+(5, '100m² o +');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `necesidades_tiempo`
+--
+
+CREATE TABLE `necesidades_tiempo` (
+  `ID_NecesidadTiempo` int(11) NOT NULL,
+  `Descripcion` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `necesidades_tiempo`
+--
+
+INSERT INTO `necesidades_tiempo` (`ID_NecesidadTiempo`, `Descripcion`) VALUES
+(1, '1h - 3h'),
+(2, '4h - 6h'),
+(3, '7h - 10h'),
+(4, '10h o +');
 
 -- --------------------------------------------------------
 
@@ -210,38 +276,39 @@ CREATE TABLE `publicaciones` (
 CREATE TABLE `razas` (
   `ID_Raza` int(11) NOT NULL,
   `ID_Especie` int(11) NOT NULL,
-  `Raza` varchar(20) NOT NULL
+  `Raza` varchar(20) NOT NULL,
+  `ID_NecesidadEspacio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `razas`
 --
 
-INSERT INTO `razas` (`ID_Raza`, `ID_Especie`, `Raza`) VALUES
-(1, 2, 'Beagle'),
-(2, 2, 'Border Collie'),
-(3, 2, 'Boxer'),
-(4, 2, 'Bulldog'),
-(5, 2, 'Bulterrier'),
-(6, 2, 'Chihuahua'),
-(7, 2, 'Cocker'),
-(8, 2, 'Doberman'),
-(9, 2, 'Gran Danés'),
-(10, 2, 'Golden Retriever'),
-(11, 2, 'Labrador'),
-(12, 2, 'Pinscher'),
-(13, 2, 'Pitbull'),
-(14, 2, 'Poodle'),
-(15, 2, 'Rottweiler'),
-(16, 2, 'Shih Tzu'),
-(17, 2, 'Husky'),
-(18, 2, 'Yorkshire Terrier'),
-(19, 2, 'Frech Poodle'),
-(20, 2, 'Mestizo'),
-(21, 2, 'Otra'),
-(22, 1, 'Mestizo'),
-(23, 1, 'Parece de Raza'),
-(24, 1, 'Otra');
+INSERT INTO `razas` (`ID_Raza`, `ID_Especie`, `Raza`, `ID_NecesidadEspacio`) VALUES
+(1, 2, 'Beagle', 2),
+(2, 2, 'Border Collie', 2),
+(3, 2, 'Boxer', 3),
+(4, 2, 'Bulldog', 2),
+(5, 2, 'Bulterrier', 2),
+(6, 2, 'Chihuahua', 1),
+(7, 2, 'Cocker', 2),
+(8, 2, 'Doberman', 3),
+(9, 2, 'Gran Danés', 3),
+(10, 2, 'Golden Retriever', 2),
+(11, 2, 'Labrador', 2),
+(12, 2, 'Pinscher', 1),
+(13, 2, 'Pitbull', 2),
+(14, 2, 'Poodle', 3),
+(15, 2, 'Rottweiler', 3),
+(16, 2, 'Shih Tzu', 1),
+(17, 2, 'Husky', 3),
+(18, 2, 'Yorkshire Terrier', 1),
+(19, 2, 'Frech Poodle', 3),
+(20, 2, 'Mestizo', 2),
+(21, 2, 'Otra', 2),
+(22, 1, 'Mestizo', 1),
+(23, 1, 'Parece de Raza', 1),
+(24, 1, 'Otra', 1);
 
 -- --------------------------------------------------------
 
@@ -383,7 +450,27 @@ ALTER TABLE `mascotas`
   ADD KEY `ID_Raza` (`ID_Raza`),
   ADD KEY `ID_Usuario` (`ID_Usuario`),
   ADD KEY `ID_Estado_Salud` (`ID_Estado_Salud`),
-  ADD KEY `ID_Estado_Adopcion` (`ID_Estado_Adopcion`);
+  ADD KEY `ID_Estado_Adopcion` (`ID_Estado_Adopcion`),
+  ADD KEY `mascotas_fk_7` (`ID_NecesidadDinero`),
+  ADD KEY `mascotas_fk_8` (`ID_NecesidadTiempo`);
+
+--
+-- Indices de la tabla `necesidades_dinero`
+--
+ALTER TABLE `necesidades_dinero`
+  ADD PRIMARY KEY (`ID_NecesidadDinero`);
+
+--
+-- Indices de la tabla `necesidades_espacio`
+--
+ALTER TABLE `necesidades_espacio`
+  ADD PRIMARY KEY (`ID_NecesidadEspacio`);
+
+--
+-- Indices de la tabla `necesidades_tiempo`
+--
+ALTER TABLE `necesidades_tiempo`
+  ADD PRIMARY KEY (`ID_NecesidadTiempo`);
 
 --
 -- Indices de la tabla `paises`
@@ -404,7 +491,8 @@ ALTER TABLE `publicaciones`
 --
 ALTER TABLE `razas`
   ADD PRIMARY KEY (`ID_Raza`),
-  ADD KEY `ID_Especie` (`ID_Especie`);
+  ADD KEY `ID_Especie` (`ID_Especie`),
+  ADD KEY `razas_fk_1` (`ID_NecesidadEspacio`);
 
 --
 -- Indices de la tabla `sizes`
@@ -472,6 +560,24 @@ ALTER TABLE `mascotas`
   MODIFY `ID_Mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `necesidades_dinero`
+--
+ALTER TABLE `necesidades_dinero`
+  MODIFY `ID_NecesidadDinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `necesidades_espacio`
+--
+ALTER TABLE `necesidades_espacio`
+  MODIFY `ID_NecesidadEspacio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `necesidades_tiempo`
+--
+ALTER TABLE `necesidades_tiempo`
+  MODIFY `ID_NecesidadTiempo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `publicaciones`
 --
 ALTER TABLE `publicaciones`
@@ -509,6 +615,8 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
+  ADD CONSTRAINT `mascotas_fk_7` FOREIGN KEY (`ID_NecesidadDinero`) REFERENCES `necesidades_dinero` (`ID_NecesidadDinero`),
+  ADD CONSTRAINT `mascotas_fk_8` FOREIGN KEY (`ID_NecesidadTiempo`) REFERENCES `necesidades_tiempo` (`ID_NecesidadTiempo`),
   ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`ID_Especie`) REFERENCES `especies` (`ID_Especie`),
   ADD CONSTRAINT `mascotas_ibfk_2` FOREIGN KEY (`ID_Size`) REFERENCES `sizes` (`ID_Size`),
   ADD CONSTRAINT `mascotas_ibfk_3` FOREIGN KEY (`ID_Raza`) REFERENCES `razas` (`ID_Raza`),
@@ -527,6 +635,7 @@ ALTER TABLE `publicaciones`
 -- Filtros para la tabla `razas`
 --
 ALTER TABLE `razas`
+  ADD CONSTRAINT `razas_fk_1` FOREIGN KEY (`ID_NecesidadEspacio`) REFERENCES `necesidades_espacio` (`ID_NecesidadEspacio`),
   ADD CONSTRAINT `razas_ibfk_1` FOREIGN KEY (`ID_Especie`) REFERENCES `especies` (`ID_Especie`);
 
 --
