@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3307
--- Tiempo de generación: 07-11-2023 a las 21:24:44
+-- Tiempo de generación: 07-11-2023 a las 21:43:15
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -158,17 +158,18 @@ CREATE TABLE `mascotas` (
   `ID_Estado_Salud` int(11) NOT NULL,
   `ID_Estado_Adopcion` int(11) NOT NULL,
   `id_necesidad_dinero` int(11) NOT NULL,
-  `id_necesidad_tiempo` int(11) NOT NULL
+  `id_necesidad_tiempo` int(11) NOT NULL,
+  `esterilizacion` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`ID_Mascota`, `Nombre`, `Edad`, `ID_Especie`, `ID_Raza`, `ID_Size`, `ID_Usuario`, `ID_Estado_Salud`, `ID_Estado_Adopcion`, `id_necesidad_dinero`, `id_necesidad_tiempo`) VALUES
-(10, 'Bruno', 1, 1, 23, 2, 5, 1, 1, 1, 1),
-(11, 'Pepe', 2, 1, 23, 3, 4, 1, 1, 1, 1),
-(12, 'Tomas', 2, 1, 23, 3, 5, 1, 1, 1, 1);
+INSERT INTO `mascotas` (`ID_Mascota`, `Nombre`, `Edad`, `ID_Especie`, `ID_Raza`, `ID_Size`, `ID_Usuario`, `ID_Estado_Salud`, `ID_Estado_Adopcion`, `id_necesidad_dinero`, `id_necesidad_tiempo`, `esterilizacion`) VALUES
+(10, 'Bruno', 1, 1, 23, 2, 5, 1, 1, 1, 1, 0),
+(11, 'Pepe', 2, 1, 23, 3, 4, 1, 1, 1, 1, 1),
+(12, 'Tomas', 2, 1, 23, 3, 5, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
